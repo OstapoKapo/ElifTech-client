@@ -1,13 +1,13 @@
 export interface fullUser {
-    name: String,
-    email: String,
-    password: String,
-    profileImg: String,
+    name: string,
+    email: string,
+    password: string,
+    profileImg: string,
     question: Question[],
-    _id?: String,
-    __v?: Number
+    _id?: string,
+    __v?: number
 }
 
 export interface Question {
-
+    name: string,
 }
