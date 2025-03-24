@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import AuthProvider from "./components/AuthProvider/AuthProvider";
+import "./globals.scss";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -18,17 +14,17 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
+                                       children,
+                                   }: Readonly<{
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
-  );
+    return (
+        <html lang="en">
+        <body className={geistMono.className}>
+        <AuthProvider>
+            <div className="my-container">{children}</div>
+        </AuthProvider>
+        </body>
+        </html>
+    );
 }
