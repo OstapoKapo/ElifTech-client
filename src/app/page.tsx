@@ -1,15 +1,14 @@
-import './page.scss';
 import Link from "next/link";
 
-const Home = () =>  {
+export default function Home() {
   return (
-   <div className={'main'}>
-       <button className={'main__btn'}>Log In</button>
-       <Link href="/SignIn">
-           <button className={'main__btn'}>Sign In</button>
-       </Link>
-   </div>
-  );
-}
+      <div className={'main'}>
+        <button>
 
-export default Home;
+        </button>
+        <Link href={'/SignIn'}>
+          <button>SignIn</button>
+        </Link>
+      </div>
+  )
+}
