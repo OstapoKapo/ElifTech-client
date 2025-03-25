@@ -1,0 +1,37 @@
+@use './scss/mixins';
+
+.page{
+  @include mixins.container();
+  flex-direction: row;
+  justify-content: space-between;
+  &__btnGroup{
+    width: 40%;
+    height: 100%;
+    @include mixins.center();
+  }
+  &__btn{
+    margin: 0 20px;
+    transition: 0.4s;
+    cursor: pointer;
+    &_login{
+      @include mixins.btn(#FD4184);
+      @include mixins.text(#FD4184, 20px, 600);
+      &:hover{
+        background-color: #FD4184;
+        color: #fff;
+      }
+    }
+    &_signin{
+      @include mixins.btn(#fff);
+      @include mixins.text(#fff, 20px, 600);
+      &:hover{
+        background-color: #fff;
+        color: #FD4184
+      }
+    }
+  }
+  &__btn{
+    width: 150px;
+    height: 50px;
+  }
+}

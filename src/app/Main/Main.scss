@@ -1,0 +1,107 @@
+@use '../scss/mixins';
+
+.main{
+  @include mixins.container();
+  &__row{
+    margin-top: 30px;
+    @include mixins.row(100px);
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__filterGroup{
+    display: flex;
+    width: min-content;
+    height: 100%;
+    align-items: center;
+  }
+  &__filterBtn{
+    margin: 0 10px;
+    @include mixins.btn(#FD4184);
+    @include mixins.text(#FD4184, 20px, 600);
+    width: 150px;
+    height: 50px;
+    cursor: pointer;
+    &:hover{
+      background-color: #fff;
+    }
+  }
+  &__addBtn{
+    transition: 0.4s;
+    cursor: pointer;
+    &:hover{
+      transform: rotate(180deg);
+    }
+  }
+  &__line{
+    margin-top: 30px;
+    width: 100%;
+    height: 5px;
+    border-radius: 10px;
+    background-color: #fff;
+  }
+  &__cardContainer{
+    margin-top: 30px;
+    width: 100%;
+    height: min-content;
+    display: flex;
+    flex-wrap: wrap; /* Дозволяє елементам переноситися на новий рядок */
+    gap: 20px 10px;
+  }
+  &__card{
+    padding: 10px;
+    width: 350px;
+    min-height: 200px;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    transition: 0.4s;
+    &:hover{
+      border: 1px solid #FD4184;
+    }
+  }
+}
+.card{
+  &__top{
+    width: 100%;
+    height: min-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  &__rate{
+    height: min-content;
+    width: min-content;
+    display: flex;
+    align-items: center;
+    @include mixins.text(#fff, 20px, 700)
+  }
+  &__header{
+    @include mixins.text(#fff, 25px, 600);
+  }
+  &__text{
+    @include mixins.text(#fff, 15px, 300);
+  }
+  &__description{
+    width: 100%;
+    min-height: 50px;
+  }
+  &__row{
+    margin-top: 20px;
+    @include mixins.row(30px);
+    justify-content: space-between;
+  }
+  &__runBtn{
+    width: 40px;
+    height: 40px;
+    background-color: inherit;
+    border: 1px solid #fff;
+    color: #fff;
+    @include mixins.center();
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.4s;
+    &:hover{
+      font-size: 17px;
+    }
+  }
+}

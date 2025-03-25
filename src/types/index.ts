@@ -1,38 +1,32 @@
 
-export interface fullUser {
+export interface User {
     name: String,
     email: String,
     password: String,
     profileImg: String,
-    cars: Car[],
+    userQuestions: String[],
+    passedQuestions: String[]
     _id?: String,
     __v?: Number
 }
 
-export interface Car {
+export interface Question {
     _id?: String,
     name: String,
-    mileage: Number,
-    averageSpeed: Number,
-    history: History[],
-    carImg: String,
-    filter: {
-        lastChange: String,
-        nextChange: {
-            date: String,
-            mileage: Number
-        }
-    },
-    oil: {
-        lastChange: String,
-        nextChange: {
-            date: String,
-            mileage: Number
-        }
-    }
-}
-
-export interface History {
+    author: String,
     description: String,
-    date: String
+    questions: SmallQuestion[],
+    maxTime: Number,
+    results: Result[],
+
+}
+export interface Result {
+    userName:String,
+    userTime: String,
+    userResult: Number
+}
+export interface SmallQuestion {
+    type: String,
+    content: String,
+    answer: String
 }
