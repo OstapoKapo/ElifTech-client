@@ -17,7 +17,7 @@ export const serverUrlStore = create<State & Actions>()(
                 if (process.env.NODE_ENV === 'development') {
                     return 'http://localhost:8000/api'; // Local development
                 } else {
-                    return 'https://machine-service-server.onrender.com/api'
+                    return 'https://elif-tech-back-aeaf208a7993.herokuapp.com/api'
                 }
             };
             set({serverUrl: getUrl()})
