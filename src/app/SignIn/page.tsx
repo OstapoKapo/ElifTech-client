@@ -3,7 +3,7 @@ import './SignIn.scss';
 import {FormEvent, useEffect} from "react";
 import {serverUrlStore} from "@/Store/serverUrl";
 import {useRouter} from "next/navigation";
-import {User} from "@/Types";
+import {User} from "@/types";
 import axios from 'axios';
 import {useSession} from "next-auth/react";
 

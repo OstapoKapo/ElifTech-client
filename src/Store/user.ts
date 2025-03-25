@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { immer } from 'zustand/middleware/immer';
-import { User } from '../Types/index';
+import { User } from '@/types';
 
 type State = {
     user: User
