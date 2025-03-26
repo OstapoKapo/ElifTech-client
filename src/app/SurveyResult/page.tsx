@@ -8,6 +8,7 @@ import {useRouter} from "next/navigation";
 import React, {useEffect, useRef} from "react";
 import axios from "axios";
 import {surveyStore} from "@/Store/surveyStore";
+import { Suspense } from 'react';
 
 interface Result{
     surveyName:string | undefined,
@@ -105,7 +106,7 @@ const SurveyResult = () => {
     }
 
     return (
-
+        <Suspense fallback={<div>Loading...</div>}>
         <div className={'surveyResult'}>
             <GetDbUserFunc/>
             <h1>Finish!!!</h1>
@@ -132,6 +133,7 @@ const SurveyResult = () => {
             )}
             <button onClick={handleBack}>Back</button>
         </div>
+            </Suspense>
     )
 }
 export default SurveyResult;

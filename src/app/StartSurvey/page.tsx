@@ -7,6 +7,7 @@ import {userStore} from "@/Store/user";
 import { Survey } from '@/types';
 import GetDbUserFunc from "@/app/сomponents/GetDbUserFunc/GetDbUserFunc";
 import {useSession} from "next-auth/react";
+import { Suspense } from 'react';
 
 interface Result{
     surveyName:string | undefined,
@@ -20,6 +21,7 @@ const StartSurvey: React.FC = () => {
     const searchParams = useSearchParams();
     const surveyData = searchParams.get('survey');
     const survey: Survey | null = surveyData ? JSON.parse(decodeURIComponent(surveyData)) : null;
+
 
     const {user} = userStore();
     const session = useSession();
@@ -147,6 +149,7 @@ const StartSurvey: React.FC = () => {
     const currentQuestion = survey.questions[currentQuestionIndex];
 
     return (
+        <Suspense fallback={<div>Loading...</div>}>
         <div className="startSurvey">
             <GetDbUserFunc/>
             <h1>Survey's name: <span>{survey.name}</span></h1>
@@ -211,6 +214,7 @@ const StartSurvey: React.FC = () => {
 
              <h3 className={'startSurvey__time'}>⏳ Час, що залишився: {timeLeft}</h3>
         </div>
+        </Suspense>
     );
 };
 
