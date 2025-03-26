@@ -4,6 +4,7 @@ import "./globals.scss";
 import AuthProvider from "./сomponents/AuthProvider/AuthProvider";
 import Header from "./сomponents/Header/Header";
 import React from "react";
+import {Suspense} from "react";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -24,7 +25,9 @@ export default function RootLayout({
       <body className={geistMono.className}>
       <AuthProvider>
         <Header/>
-        <div className="my-container">{children}</div>
+        <div className="my-container">
+            <Suspense>{children}</Suspense>
+        </div>
       </AuthProvider>
       </body>
       </html>
