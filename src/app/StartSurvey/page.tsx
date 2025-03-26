@@ -148,7 +148,7 @@ const StartSurvey: React.FC = () => {
 
     const currentQuestion = survey.questions[currentQuestionIndex];
 
-    return (<Suspense fallback={<div>Loading...</div>}>
+    return (<Suspense >
         <div className="startSurvey">
             <GetDbUserFunc/>
             <h1>Survey's name: <span>{survey.name}</span></h1>
