@@ -5,6 +5,7 @@ import Image from "next/image";
 import {signOut, useSession} from 'next-auth/react';
 import {userStore} from "@/Store/user";
 import React from "react";
+import Link from "next/link";
 
 const Header: React.FC = () => {
 
@@ -28,9 +29,11 @@ const Header: React.FC = () => {
             </div>
             <div style={{"display": session.status === 'authenticated' ? 'flex' : 'none'}} className={'header__profile'}>
                 <button className={'header__btn header__btn_signOut'} onClick={() => {signOut()}}>SignOut</button>
-                <button className={'header__btn header__btn_profile'}>Profile</button>
+                <Link href={'/Profile'}>
+                    <button className={'header__btn header__btn_profile'}>Profile</button>
+                </Link>
                 <div className={'header__avatar'}>
-                    {user.profileImg && user.profileImg.length > 3 ? (
+                {user.profileImg && user.profileImg.length > 3 ? (
                         <img src={`${user.profileImg}`} alt={`${user.name || 'User'}'s profile picture`} />
                     ) : (
                         <span>{user.name ? firstLetter(user.name) : 'N/A'}</span>

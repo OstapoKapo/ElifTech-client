@@ -64,7 +64,7 @@ const Main: React.FC = () => {
             <GetDbUserFunc/>
             <div className={'main__row'}>
                 <div className={'main__filterGroup'} ref={filterDiv} onClick={handleFilter}>
-                    <button className={'main__filterBtn main__filterBtn_active'} data-action={'name'}>By Name</button>
+                    <button className={'main__filterBtn '} data-action={'name'}>By Name</button>
                     <button className={'main__filterBtn'} data-action={'questions'}>By Questions</button>
                     <button className={'main__filterBtn'} data-action={'completions'}>By Completions</button>
                 </div>

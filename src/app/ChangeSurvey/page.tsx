@@ -1,9 +1,8 @@
 'use client'
-import './CreateSurvey.scss';
+import './ChangeSurvey.scss';
 import {useSession} from 'next-auth/react';
-import {useRouter} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import {serverUrlStore} from "@/Store/serverUrl";
-import {userStore} from '@/Store/user';
 import React, {useEffect, useState} from "react";
 import {Survey, Question, Option} from "@/types";
 import axios from "axios";
@@ -11,21 +10,16 @@ import GetDbUserFunc from "@/app/сomponents/GetDbUserFunc/GetDbUserFunc";
 
 
 
-const CreateSurvey: React.FC = () => {
+const ChangeSurvey: React.FC = () => {
+
+    const searchParams = useSearchParams();
+    const surveyData = searchParams.get('survey');
+    const surveys: Survey | null = surveyData ? JSON.parse(decodeURIComponent(surveyData)) : null;
 
     const {serverUrl} = serverUrlStore();
-    const {user} = userStore();
     const session = useSession();
     const router = useRouter();
-    const [survey, setSurvey] = useState<Survey>({
-        name: '',
-        description: '',
-        questions: [],
-        author: '',
-        maxTime: 0,
-        results: [],
-        rate: []
-    });
+    const [survey, setSurvey] = useState<any>(surveys);
 
     useEffect(() => {
         const savedSurvey = localStorage.getItem("surveyData");
@@ -49,19 +43,19 @@ const CreateSurvey: React.FC = () => {
     };
 
     const deleteQuestion = (index: number) => {
-        const updatedQuestions = survey.questions.filter((_, i) => i !== index);
+        const updatedQuestions = survey.questions.filter((_:any, i:number) => i !== index);
         setSurvey({ ...survey, questions: updatedQuestions });
     };
 
     const updateQuestion = (index: number, field: keyof Question, value: any) => {
-        const updatedQuestions = survey.questions.map((q, i) =>
+        const updatedQuestions = survey.questions.map((q:any, i:any) =>
             i === index ? { ...q, [field]: value } : q
         );
         setSurvey({ ...survey, questions: updatedQuestions });
     };
 
     const addOption = (index: number) => {
-        const updatedQuestions = survey.questions.map((q, i) => {
+        const updatedQuestions = survey.questions.map((q:any, i:number) => {
             if (i === index) {
                 const options = q.options ? [...q.options, { text: '', correct: false }] : [{ text: '', correct: false }];
                 return { ...q, options };
@@ -72,9 +66,9 @@ const CreateSurvey: React.FC = () => {
     };
 
     const deleteOption = (qIndex: number, oIndex: number) => {
-        const updatedQuestions = survey.questions.map((q, i) => {
+        const updatedQuestions = survey.questions.map((q:any, i:number) => {
             if (i === qIndex && q.options) {
-                const updatedOptions = q.options.filter((_, j) => j !== oIndex);
+                const updatedOptions = q.options.filter((_:any, j:number) => j !== oIndex);
                 return { ...q, options: updatedOptions };
             }
             return q;
@@ -83,14 +77,14 @@ const CreateSurvey: React.FC = () => {
     };
 
     const updateOption = (qIndex: number, oIndex: number, field: keyof Option, value: any) => {
-        const updatedQuestions = survey.questions.map((q, i) => {
+        const updatedQuestions = survey.questions.map((q:any, i:number) => {
             if (i === qIndex && q.options) {
-                let updatedOptions = q.options.map((opt, j) =>
+                let updatedOptions = q.options.map((opt:any, j:number) =>
                     j === oIndex ? { ...opt, [field]: value } : opt
                 );
 
                 if (q.types === 'single' && field === 'correct' && value) {
-                    updatedOptions = updatedOptions.map((opt, j) => ({ ...opt, correct: j === oIndex }));
+                    updatedOptions = updatedOptions.map((opt:any, j:number) => ({ ...opt, correct: j === oIndex }));
                 }
 
                 return { ...q, options: updatedOptions };
@@ -101,9 +95,9 @@ const CreateSurvey: React.FC = () => {
     };
 
     const saveSurvey = async () => {
-        const newSurvey = {...survey, author:user.email}
+        const newSurvey = {...survey}
         console.log(newSurvey)
-        await loadSurveyToDb(newSurvey, user.email);
+        await updateSurvey(newSurvey);
         setSurvey({
             name: '',
             description: '',
@@ -115,16 +109,20 @@ const CreateSurvey: React.FC = () => {
         })
     };
 
-    const loadSurveyToDb = async (survey: Survey, userEmail: string) => {
-        await axios.post(`${serverUrl}/loadSurveyToDb`, {survey, userEmail})
-            .then((response) => {
-                if(response.status === 200){
-                    console.log(response.data)
-                    router.push('/Main');
-                }else if(response.status === 201){
-                    alert('Sorry this name is already used');
-                }
-            })
+    const updateSurvey = async (survey: Survey) => {
+        try {
+            await axios.post(`${serverUrl}/updateSurvey`, {survey})
+                .then((response) => {
+                    if(response.status === 200){
+                        console.log(response.data)
+                        router.push('/Main');
+                    }else if(response.status === 201){
+                        alert('Sorry this name is already used');
+                    }
+                })
+        }catch(err){
+            console.log(err);
+        }
     }
 
     useEffect(() => {
@@ -143,12 +141,6 @@ const CreateSurvey: React.FC = () => {
             <GetDbUserFunc/>
             <h2>Create Survey</h2>
             <input className="createSurvay__inp"
-                   type="text"
-                   placeholder="Name"
-                   value={survey.name}
-                   onChange={(e) => setSurvey({...survey, name: e.target.value})}
-            />
-            <input className="createSurvay__inp"
                    type="number"
                    placeholder="Time(in minutes)"
                    value={survey.maxTime}
@@ -160,7 +152,7 @@ const CreateSurvey: React.FC = () => {
                       onChange={(e) => setSurvey({...survey, description: e.target.value})}
             />
             <button className={'createSurvay__btn'} onClick={addQuestion}>Add Question</button>
-            {survey.questions.map((q, index) => (
+            {survey.questions.map((q:any, index:number) => (
                 <div className={'ddd'} key={index}>
                     <input className="createSurvay__inp"
                            type="text"
@@ -179,16 +171,16 @@ const CreateSurvey: React.FC = () => {
                     <button className="createSurvay__btn createSurvay__btn_delete" onClick={() => deleteQuestion(index)}>Delete Question</button>
                     {q.types === 'text' && (
                         <input className="createSurvay__inp"
-                            type="text"
-                            placeholder="Correct Answer"
-                            value={q.answer || ''}
-                            onChange={(e) => updateQuestion(index, 'answer', e.target.value)}
+                               type="text"
+                               placeholder="Correct Answer"
+                               value={q.answer || ''}
+                               onChange={(e) => updateQuestion(index, 'answer', e.target.value)}
                         />
                     )}
                     {(q.types === 'single' || q.types === 'multiple') && (
                         <div className="options">
                             <button className={'createSurvay__btn createSurvay__btn_add'} onClick={() => addOption(index)}>Add Variant</button>
-                            {q.options?.map((opt, oIndex) => (
+                            {q.options?.map((opt:any, oIndex:number) => (
                                 <div key={oIndex} className="option">
                                     <input className="createSurvay__inp"
                                            type="text"
@@ -215,4 +207,4 @@ const CreateSurvey: React.FC = () => {
     );
 };
 
-export default CreateSurvey;
+export default ChangeSurvey;
