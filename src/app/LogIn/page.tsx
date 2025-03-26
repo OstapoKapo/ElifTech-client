@@ -8,7 +8,7 @@ import {signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 
-const LogIn = () => {
+const LogIn: React.FC = () => {
 
     const session = useSession();
     const router = useRouter();

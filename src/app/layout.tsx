@@ -3,6 +3,7 @@ import {  Geist_Mono } from "next/font/google";
 import "./globals.scss";
 import AuthProvider from "./сomponents/AuthProvider/AuthProvider";
 import Header from "./сomponents/Header/Header";
+import React from "react";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",

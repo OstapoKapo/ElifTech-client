@@ -1,32 +1,41 @@
 
 export interface User {
-    name: String,
-    email: String,
-    password: String,
-    profileImg: String,
-    userQuestions: String[],
-    passedQuestions: String[]
-    _id?: String,
-    __v?: Number
+    name: string,
+    email: string,
+    password: string,
+    profileImg: string,
+    userQuestions: string[],
+    passedQuestions: [{
+        surveyName:string,
+        userTime: number,
+        userResult: string
+    }]
+    _id?: string,
+    __v?: number
 }
 
-export interface Question {
-    _id?: String,
-    name: String,
-    author: String,
-    description: String,
-    questions: SmallQuestion[],
-    maxTime: Number,
+export interface Survey {
+    _id?: string,
+    name: string,
+    author: string,
+    description:string,
+    questions: Question[];
+    maxTime: number,
     results: Result[],
-
+    rate: number[]
 }
 export interface Result {
-    userName:String,
-    userTime: String,
-    userResult: Number
+    userName:string,
+    userTime: number,
+    userResult: string
 }
-export interface SmallQuestion {
-    type: String,
-    content: String,
-    answer: String
+export interface Question {
+    text: string;
+    answer?: string;
+    types: "text" | "single" | "multiple";
+    options?: Option[];
+}
+export interface Option {
+    text: string;
+    correct: boolean;
 }

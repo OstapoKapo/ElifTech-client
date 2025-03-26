@@ -1,13 +1,13 @@
 'use client'
 import './SignIn.scss';
-import {FormEvent, useEffect} from "react";
+import React, {FormEvent, useEffect} from "react";
 import {serverUrlStore} from "@/Store/serverUrl";
 import {useRouter} from "next/navigation";
 import {User} from "@/types";
 import axios from 'axios';
 import {useSession} from "next-auth/react";
 
-const SignIn = () => {
+const SignIn: React.FC = () => {
 
     const {serverUrl, setServerUrl} = serverUrlStore();
     const router = useRouter();
@@ -48,7 +48,11 @@ const SignIn = () => {
                 email: email,
                 password: password,
                 userQuestions: [],
-                passedQuestions: [],
+                passedQuestions: [{
+                    surveyName:'',
+                    userTime: 0,
+                    userResult: ''
+                }],
                 profileImg: ''
             };
             try{

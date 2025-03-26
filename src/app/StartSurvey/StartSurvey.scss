@@ -1,0 +1,46 @@
+@use '../scss/mixins';
+
+.startSurvey{
+  padding: 30px 0;
+  @include mixins.container();
+  height: min-content;
+  align-items: center;
+  & span{
+    color: #FD4184;
+  }
+  & h1{
+    margin-bottom: 10px;
+  }
+  &__container{
+    margin-top: 150px;
+    width: 100%;
+    height: min-content;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  &__label{
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px;
+  }
+  &__btn{
+    cursor: pointer;
+    transition: 0.4s;
+    margin: 30px;
+    width: 150px;
+    height: 40px;
+    @include mixins.center();
+    @include mixins.text(#FD4184, 20px, 600);
+    border: 1px solid #FD4184;
+    background-color: inherit;
+    border-radius: 10px;
+    &:hover{
+      background-color: #FD4184;
+      color: #fff;
+    }
+  }
+  &__time{
+    margin-top: 100px;
+  }
+}

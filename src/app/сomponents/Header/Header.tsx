@@ -4,8 +4,9 @@ import Logo from '../../../../public/icon/logo.svg'
 import Image from "next/image";
 import {signOut, useSession} from 'next-auth/react';
 import {userStore} from "@/Store/user";
+import React from "react";
 
-const Header = () => {
+const Header: React.FC = () => {
 
     const session = useSession();
     const {user} = userStore();

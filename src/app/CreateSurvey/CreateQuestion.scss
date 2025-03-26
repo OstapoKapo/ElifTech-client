@@ -1,0 +1,132 @@
+@use '../scss/mixins';
+
+.createSurvay {
+  padding: 30px 0;
+  @include mixins.container();
+  height: min-content;
+
+  &__row{
+    @include mixins.row(50px);
+    justify-content: flex-end;
+  }
+
+  &__btn {
+    @include mixins.btn(#fff);
+    @include mixins.text(#fff, 17px, 600);
+    width: 150px;
+    height: 50px;
+    margin: 10px 0;
+    &:hover{
+      background-color: #fff;
+      color: #FD4184;
+    }
+    &_add{
+      height: 40px;
+      width: 120px;
+      background-color: deepskyblue;
+      &:hover{
+        background-color: deepskyblue;
+        color: #fff;
+      }
+    }
+    &_delete{
+      height: 40px;
+      width: 140px;
+      background-color: red;
+      &:hover{
+        background-color: red;
+        color: #fff;
+      }
+    }
+  }
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  &__inp {
+      width: 350px;
+      height: 50px;
+      margin: 20px 0;
+      padding-left: 10px;
+      border-radius: 10px;
+      background-color: inherit;
+      @include mixins.text(#fff, 20px, 500);
+      border: 1px solid #fff;
+      &:focus{
+        outline: none;
+        border: 2px solid #FD4184;
+      }
+      &::placeholder{
+        color: #fff;
+      }
+  }
+
+
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background-color: #fff;
+    transition: border-color 0.3s;
+
+    &:focus {
+      border-color: #4CAF50;
+      outline: none;
+    }
+  }
+
+  .question {
+    margin-bottom: 20px;
+
+    .options {
+      margin-top: 8px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+
+      input[type="text"] {
+        flex-grow: 1;
+        margin-right: 8px;
+      }
+
+      button {
+        margin-left: 8px;
+        background-color: #f44336;
+
+        &:hover {
+          background-color: #e53935;
+        }
+      }
+
+      input[type="checkbox"] {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  .delete-question {
+    background-color: #f44336;
+    margin-top: 8px;
+
+    &:hover {
+      background-color: #e53935;
+    }
+  }
+}
+
+.ddd{
+  border-radius: 10px;
+  border: 1px solid #fff;
+  margin: 10px 0;
+  padding: 20px;
+}

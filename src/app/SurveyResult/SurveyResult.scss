@@ -1,0 +1,48 @@
+@use '../scss/mixins';
+.surveyResult{
+  @include mixins.container();
+  padding: 50px;
+  height: min-content;
+  & h1{
+    margin-bottom: 30px;
+  }
+  & h2{
+    margin: 10px 0;
+  }
+  &__rate{
+    margin: 50px 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__item{
+      cursor: pointer;
+      margin: 0 10px;
+      width: 50px;
+      height: 50px;
+      background-size:cover;
+      background-image: url('../../../public/icon/emptyStar.svg');
+      &_active{
+        background-image: url('../../../public/icon/fullStar.svg');
+      }
+    }
+  }
+  &__leader{
+    margin: 20px 0;
+    padding: 20px;
+    width: 300px;
+    height: min-content;
+    border: 1px solid #FD4184;
+    border-radius: 10px;
+  }
+  &__logo{
+    @include mixins.center();
+    @include mixins.text(#fff, 20px, 600);
+    margin-right: 15px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #FD4184;
+  }
+}
