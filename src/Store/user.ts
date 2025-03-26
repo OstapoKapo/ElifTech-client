@@ -18,7 +18,11 @@ export const userStore = create<State & Actions>()(
             password: '',
             profileImg: '',
             userQuestions: [],
-            passedQuestions: [],
+            passedQuestions: [{
+                surveyName:'',
+                userTime: 0,
+                userResult: '',
+            }],
             _id: '',
             __v: 0
         },
