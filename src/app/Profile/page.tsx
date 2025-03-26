@@ -71,8 +71,8 @@ const Profile = () => {
                     </div>
                 </div>)
             ) : (
-                surveys?.length > 0 && user?.userQuestions?.length > 0 ?
-                    surveys.map((item:Survey, index:number )=>  user.userQuestions[index] && item.name === user.userQuestions[index] ?
+
+                    surveys.map((item:Survey, index:number )=>  item.author === user.email ?
                     <div className={'card'} key={index}>
                         <div className={'card__top'}>
                             <p className={'card__header'}>{item.name}</p>
@@ -100,7 +100,7 @@ const Profile = () => {
                             </div>
 
                         </div>
-                    </div> : '') : ''
+                    </div> : '')
             )}
             </div>
         </div>
