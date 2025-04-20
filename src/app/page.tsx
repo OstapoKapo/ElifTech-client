@@ -30,6 +30,7 @@ export default function Home() {
               <Link href={'/LogIn'}>
                   <button className={'page__btn page__btn_login'}>LogIn</button>
               </Link>
+
               <Link href={'/SignIn'}>
                   <button className={'page__btn page__btn_signin'}>SignIn</button>
               </Link>
